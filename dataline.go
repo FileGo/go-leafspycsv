@@ -255,9 +255,12 @@ func (line *DataLine) Marshal(fields []string) (err error) {
 	}
 
 	// Bat12VAmp
-	line.Bat12VAmp, err = strconv.ParseFloat(fields[119], 64)
-	if err != nil {
-		return err
+	// Check for "na"
+	if fields[119] != "na" {
+		line.Bat12VAmp, err = strconv.ParseFloat(fields[119], 64)
+		if err != nil {
+			return err
+		}
 	}
 
 	// VIN

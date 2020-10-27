@@ -106,7 +106,7 @@ func parseFile(path string) []*DataLine {
 		if !firstLine { // Discard first line, as it's headers, not data
 			line := &DataLine{}
 			if err = line.Marshal(fields); err != nil {
-				panic(err)
+				log.Panicf("File: %s\nError: %#v\n", path, err)
 			}
 
 			datalines = append(datalines, line)
@@ -198,6 +198,7 @@ func main() {
 			count += len(df.Lines)
 		}
 
-		fmt.Printf("Number of lines total: %d", count)
+		fmt.Printf("Number of files: %d\n", len(datafiles))
+		fmt.Printf("Number of lines total: %d\n", count)
 	}
 }
